@@ -107,7 +107,9 @@ export const getRestaurant = async (req : Request, res : Response): Promise<Resp
 
 export const deleteRestaurant = async (req: Request, res: Response): Promise<Response> => {
     const { restaurantid } = req.params;
+    const ownerid = req.id;
     try {
+
         const restaurant = await Restaurantmodel.findByIdAndDelete(restaurantid);
         if (!restaurant) {
             return res.status(404).json({

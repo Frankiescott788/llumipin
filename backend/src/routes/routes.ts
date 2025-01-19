@@ -29,7 +29,7 @@ router.patch("/api/restaurants/:restaurantid", useAuth,updateRestaurant);
 
 // reservation router
 router.post("/api/reservation", useAuth ,makeReservation);
-router.get("/api/reservation/restaurant/:restaurantId", useAuth, getRestaurantReservations);
-router.get("/api/reservation/:reservationId", useAuth, getReservation);
+router.get("/api/reservation", useAuth, getRestaurantReservations);
+router.get("/api/reservation/:restaurantId/:reservationId", useAuth, getReservation);
 
 export default router

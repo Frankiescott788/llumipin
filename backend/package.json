@@ -13,6 +13,7 @@
     "server": "nodemon dist/app.js"
   },
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "@types/cors": "^2.8.17",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
@@ -20,6 +21,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
+    "restviz": "^1.0.0",
     "uuid": "^11.0.5",
     "validator": "^13.12.0"
   },
