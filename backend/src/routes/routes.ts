@@ -9,6 +9,7 @@ import {
     updateRestaurant
 } from "../controllers/restaurantController";
 import {getReservation, getRestaurantReservations, makeReservation} from "../controllers/reservationsController";
+import {capturePayment, createOrder} from "../controllers/paymentController";
 
 const router = Router();
 
@@ -32,4 +33,7 @@ router.post("/api/reservation", useAuth ,makeReservation);
 router.get("/api/reservation", useAuth, getRestaurantReservations);
 router.get("/api/reservation/:restaurantId/:reservationId", useAuth, getReservation);
 
+// payment routes
+router.post("/api/payment/", useAuth, createOrder);
+router.post("/api/payment/:restaurantId/:reservationId", capturePayment);
 export default router

@@ -9,27 +9,27 @@ import {genSalt} from "bcrypt";
 
 function Errors(err: any) {
 
-    const errs = {
-        duplicationErrors: "",
+    const errs : any = {
         username: "",
         email: "",
-        phone: 0,
+        phone: "",
         role: "",
         password: ""
     }
-    if (err.code === 11000) {
-        if (err.keyPattern.email) {
-            errs.duplicationErrors = "Email already in user";
-        }
-        if (err.keyPattern.phone) {
-            errs.duplicationErrors = "Phone number already exists";
-        }
-    }
-    if (err.message.includes("user validation failed")) {
+    if (err.message.includes("users validation failed")) {
         Object.values(err.errors).forEach((err: any) => {
-            err[err.properties.path] = err.message;
+            errs[err.properties.path] = err.message;
         });
     }
+    if (err.code === 11000) {
+        if (err.keyPattern.email) {
+            errs.email = "Email already in user";
+        }
+        if (err.keyPattern.phone) {
+            errs.phone = "Phone number already exists";
+        }
+    }
+
 
     return errs
 }
@@ -62,6 +62,7 @@ export const signup = async (req: Request, res: Response): Promise<Response> => 
 
     } catch (err: any) {
         console.log(Errors(err));
+        console.log(err)
         return res.status(400).json(Errors(err));
     }
 }
@@ -74,7 +75,7 @@ export const signin = async (req : Request, res : Response): Promise<Response> =
     try {
         const user = await UserModel.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message : "email not found" });
+            return res.status(400).json({ message : "No account found with this email. Please double-check or sign up." });
         }
 
         const matchPassword = await bcrypt.compare(password, user.password as string);

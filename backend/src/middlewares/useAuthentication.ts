@@ -9,6 +9,7 @@ export default async function useAuth (req : Request, res : Response, next : Nex
     );
 
     if (!token) {
+        console.log("error")
         return res.status(400).json({ message : "Please provide token" });
     }
 

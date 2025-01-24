@@ -21,7 +21,7 @@ const userSchema = new Schema<User>({
         validate : [isEmail, "Please provide a valid email"]
     },
     phone : {
-        type : Number,
+        type : String,
         required : [true, "Phone is required"],
         unique : true
     },

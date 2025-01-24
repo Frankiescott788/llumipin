@@ -73,6 +73,7 @@ export const getReservation = async (req : Request, res : Response): Promise<Res
         if (!mongoose.Types.ObjectId.isValid(restaurantId)) {
             return res.status(400).json({message : "invalid object id"})
         }
+        
         const restaurant = await Restaurant.findOne({ ownerId });
 
         if (!restaurant) {

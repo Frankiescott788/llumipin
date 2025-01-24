@@ -1,6 +1,9 @@
 import mongoose, {model, Schema} from "mongoose";
 
 const paymentSchema = new Schema({
+    orderID : {
+        type : String,
+    },
     userId: {
         type: String,
         required: true
@@ -19,11 +22,10 @@ const paymentSchema = new Schema({
     },
     paymentMethod: {
         type: String,
-        required: true
     },
     status: {
         type: String,
-        enum: ["successful", "failed"],
+        enum: ["successful", "failed", "CREATED"],
         required: true
     }
 }, { timestamps: true });

@@ -2,28 +2,23 @@ import {Request, Response} from "express";
 import {Restaurant} from "../types";
 import Restaurantmodel from "../models/restaurantmodel";
 
-function HandleErrors(err: any) {
-    const errs = {
-        name: "",
-        contactNumber: "",
-        cuisine: "",
-        photos: "",
-        description: "",
-        address: "",
-        openingHours: "",
-        averageRating: ""
-    };
+export const HandleErrors = (err: any) => {
+    const errs: any = {};
 
-    Object.values(err.errors).forEach((error: any) => {
-        err[error.properties.path] = error.message
-    });
-
-    if (err.code === 11000) {
-        errs.name = "Restaurant name should be unique"
+    if (err.message.includes("restaurant validation failed")) {
+        Object.values(err.errors).forEach((error: any) => {
+            errs[error.path] = error.message;
+        });
     }
 
-    return errs
-}
+    console.log(err)
+
+    if (err.code === 11000) {
+        errs.name = "Restaurant name should be unique";
+    }
+
+    return errs;
+};
 
 export const reqister = async (req: Request, res: Response): Promise<Response> => {
     const {
@@ -59,10 +54,16 @@ export const reqister = async (req: Request, res: Response): Promise<Response> =
         });
 
     } catch (e: any) {
-        console.log(e.message);
+        const { name, contactNumber, cuisine, photos, description, address, openingHours, averageRating } = HandleErrors(e);
+
+        if (name || contactNumber || cuisine || photos || description || address || openingHours || averageRating) {
+            return res.status(400).json({
+            message: "Validation error",
+            details: HandleErrors(e)
+            });
+        }
         return res.status(500).json({
             message: "Internal server error",
-            details : HandleErrors(e)
         });
     }
 };

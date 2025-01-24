@@ -4,7 +4,7 @@ export interface User {
     user_id? : string,
     username : string,
     email : string,
-    phone : Number,
+    phone : string,
     role : string,
     password : string
 }
@@ -31,8 +31,8 @@ export interface Restaurant {
     ownerId?: string; // ObjectId as a string
     address: Address;
     contactNumber: string;
-    cuisine: string[]; // Array of cuisine types, e.g., ["Italian", "Mexican"]
-    openingHours: string[];
+    cuisine: string[]; // Array of cuisine interfaces, e.g., ["Italian", "Mexican"]
+    openingHours: string;
     photos: string[]; // Array of URLs for images
     description: string;
     averageRating: number
