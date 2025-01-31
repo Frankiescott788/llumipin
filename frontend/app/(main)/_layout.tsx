@@ -20,9 +20,9 @@ export default function MainLayout(): ReactElement {
         return <Text>Loading...</Text>
     }
 
-    if(!isAuthenticated) {
-        return <Redirect href={"/(onboarding)"}/>
-    }
+    // if(!isAuthenticated) {
+    //     return <Redirect href={"/(onboarding)"}/>
+    // }
 
     return (
         <Tabs screenOptions={{ headerShown: false, tabBarStyle: { borderWidth: 0, borderColor: "transparent", shadowColor : "white" , height : 60, paddingTop : 10} }}>
