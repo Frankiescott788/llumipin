@@ -63,6 +63,9 @@ const ProfileScreen = () => {
       case 'About':
         navigation.navigate('About'); 
         break;
+        case 'Privacy':
+          navigation.navigate('Privacy'); 
+          break;
       case 'Log Out':
         Alert.alert('Logging out...', 'You have been logged out.', [
           { text: 'OK', onPress: () => navigation.navigate('signup') },
